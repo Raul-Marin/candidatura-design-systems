@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --color-paper: #f4f4f2;
+  --color-ink: #1c1917;
+  --color-line: #d6d3d1;
+  --color-muted: #44403c;
+  --color-panel: #fafaf9;
+}
+
+html {
+  color-scheme: light;
+  background: var(--color-paper);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #e7e5e4;
+  color: #1c1917;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+input[type='date']::-webkit-datetime-edit,
+input[type='date']::-webkit-datetime-edit-fields-wrapper,
+input[type='date']::-webkit-datetime-edit-text,
+input[type='date']::-webkit-datetime-edit-month-field,
+input[type='date']::-webkit-datetime-edit-day-field,
+input[type='date']::-webkit-datetime-edit-year-field {
+  color: #1c1917;
+}
+
+input,
+textarea,
+select {
+  min-width: 0;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #44403c;
+  opacity: 1;
+}
+
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #1c1917;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 1;
+}
+
+@keyframes step-in {
+  from {
+    transform: translateY(4px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.step-in {
+  animation: step-in 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-in {
+    animation: none;
+  }
+}

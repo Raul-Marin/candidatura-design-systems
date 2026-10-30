@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV y tres ofertas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f7f4ee;
+      --ink: #1a1814;
+      --body: #3a342e;
+      --muted: #5c564e;
+      --rule: #ddd6cb;
+      --rust: #8c3f24;
+      --rust-bar: #b85a32;
+      --card: #fffcf7;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { background: var(--paper); }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Instrument Sans", "Avenir Next", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .accent {
+      height: 4px;
+      background: var(--rust-bar);
+    }
+
+    .page {
+      width: min(920px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 40px 0 72px;
+    }
+
+    .kicker {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Newsreader, Georgia, serif;
+      font-size: clamp(40px, 6vw, 58px);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+    }
+
+    .lede {
+      max-width: 62ch;
+      margin: 18px 0 0;
+      color: var(--body);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .scores {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 36px;
+    }
+
+    .score {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      padding: 18px 18px 16px;
+    }
+
+    .score p {
+      margin: 0;
+    }
+
+    .score .who {
+      color: var(--muted);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .score .num {
+      margin-top: 8px;
+      font-family: Newsreader, Georgia, serif;
+      font-size: 52px;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+    }
+
+    .score .role {
+      margin-top: 12px;
+      color: var(--body);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .meter {
+      height: 3px;
+      margin-top: 16px;
+      background: var(--rule);
+    }
+
+    .meter span {
+      display: block;
+      height: 100%;
+      background: var(--rust-bar);
+    }
+
+    section {
+      margin-top: 48px;
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .label::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--rust-bar);
+    }
+
+    .filete {
+      height: 1px;
+      margin-bottom: 4px;
+      background: var(--rule);
+    }
+
+    .line {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 12px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .pts {
+      font-family: Newsreader, Georgia, serif;
+      font-size: 22px;
+      line-height: 1.2;
+      color: var(--rust);
+    }
+
+    .pts.mid { color: var(--ink); }
+    .pts.none { color: var(--muted); }
+
+    .req {
+      margin: 0;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .cv {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-right: 8px;
+      padding: 1px 6px 2px;
+      border: 1px solid var(--rust-bar);
+      color: var(--rust);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      vertical-align: 1px;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 36px;
+      color: var(--muted);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 11px;
+    }
+
+    a {
+      color: var(--rust);
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 720px) {
+      .page { width: min(920px, calc(100% - 28px)); padding-top: 28px; }
+      .scores { grid-template-columns: 1fr; }
+      .kicker, .foot { flex-direction: column; }
+      .score .num { font-size: 44px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="accent"></div>
+  <main class="page">
+    <p class="kicker"><span>CV · Inés Calderón</span><span>Octubre 2026</span></p>
+    <h1>Tres ofertas, un texto.</h1>
+    <p class="lede">1 si el CV nombra el requisito, 0,5 si nombra solo una parte, 0 si no lo nombra. El marco dice «Datos de ejemplo · perfil ficticio».</p>
+
+    <div class="scores">
+      <article class="score">
+        <p class="who">Vanguard · 30 oct</p>
+        <p class="num">4,5/8</p>
+        <p class="role">Principal UX Designer, Design Systems</p>
+        <div class="meter" role="img" aria-label="4,5 de 8"><span style="width:56.25%"></span></div>
+      </article>
+      <article class="score">
+        <p class="who">Betclic · 29 oct</p>
+        <p class="num">1,5/10</p>
+        <p class="role">Head of Design Ops F/M</p>
+        <div class="meter" role="img" aria-label="1,5 de 10"><span style="width:15%"></span></div>
+      </article>
+      <article class="score">
+        <p class="who">Amplify · 28 oct</p>
+        <p class="num">1,5/9</p>
+        <p class="role">Senior Staff Engineer, Design Systems</p>
+        <div class="meter" role="img" aria-label="1,5 de 9"><span style="width:16.67%"></span></div>
+      </article>
+    </div>
+
+    <section>
+      <h2 class="label">Vanguard</h2>
+      <div class="filete"></div>
+      <div class="line">
+        <div class="pts">1</div>
+        <div>
+          <p class="req">Significant UX and product design experience, including deep experience building or evolving enterprise design systems, component libraries, or scaled pattern ecosystems.</p>
+          <p class="cv">«Seis años llevando librerías de Figma hasta el código.» «Publicó 86 componentes». El CV no usa la palabra enterprise.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts mid">0,5</div>
+        <div>
+          <p class="req">Expert knowledge of reusable system design, including components, variants, properties, tokens, patterns, templates, and documentation.</p>
+          <p class="cv">Nombra componentes, «API de variantes», tokens y «Documentó los formularios». También Zeroheight. No nombra properties, patterns ni templates.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts mid">0,5</div>
+        <div>
+          <p class="req">Strong visual and interaction design craft, with excellent judgment across typography, layout, hierarchy, behavior, responsiveness, and content patterns.</p>
+          <p class="cv">«color, tipografía, espacio». No nombra layout, hierarchy, behavior, responsiveness ni content patterns.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts mid">0,5</div>
+        <div>
+          <p class="req">Experience designing complex components and accounting for states, edge cases, accessibility requirements, and implementation constraints.</p>
+          <p class="cv">«86 componentes con estados» y «Contraste, foco y nombre accesible». No nombra edge cases ni implementation constraints.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts mid">0,5</div>
+        <div>
+          <p class="req">Strong command of Figma, including variables, modes, component architecture, library management, prototyping, and modern design-system workflows.</p>
+          <p class="cv">Nombra Figma y «API de variantes». No nombra variables, modes, library management ni prototyping.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts mid">0,5</div>
+        <div>
+          <p class="req">Experience working closely with engineers to evaluate feasibility, clarify intended behavior, and maintain alignment between design and code.</p>
+          <p class="cv">«criterio de contribución compartido por diseño e ingeniería» y «enlazó los 24 más usados con el código». No nombra feasibility ni intended behavior.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">Practical understanding of front-end concepts and how design decisions translate into production experiences.</p>
+          <p class="cv">El CV no nombra front-end concepts. La frase más cercana es «llevando librerías de Figma hasta el código».</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts">1</div>
+        <div>
+          <p class="req">Deep knowledge of accessibility and an ability to incorporate it into system architecture rather than treating it as a final review step.</p>
+          <p class="cv">«Contraste, foco y nombre accesible quedaron dentro del contrato de cada componente.» «Accesibilidad AA».</p>
+        </div>
+      </div>
+      <p class="cv"><a href="https://jobs.intodesignsystems.com/jobs/vanguard-principal-ux-designer-design-systems-1hrbk8">Ficha de la oferta</a></p>
+    </section>
+
+    <section>
+      <h2 class="label">Betclic</h2>
+      <div class="filete"></div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">At least 10 years of experience in design, design systems, or product/design operations.</p>
+          <p class="cv">«Seis años».</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts mid">0,5</div>
+        <div>
+          <p class="req">Deep, hands-on expertise in design systems at scale in Figma (components, variables, tokens) and in design-to-code workflows.</p>
+          <p class="cv">Componentes, tokens y «Figma hasta el código». No nombra variables ni at scale.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req"><span class="tag">Required</span>A strong point of view on how AI is reshaping design practice and practical experience putting it into action (AI assisted design system work, generative production, or AI-consumable design standards).</p>
+          <p class="cv">El CV no nombra AI.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">Experience leading or scaling a Design Ops / Product Ops function, ideally including team and cross-discipline management across design and creative.</p>
+          <p class="cv">El rol es «Lead de Design Systems». El CV no nombra Design Ops, Product Ops ni gestión de un equipo.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">Hands-on management experience leading a team of around 10 people across multiple disciplines, with capacity to scale as the team grows.</p>
+          <p class="cv">El CV no nombra un equipo ni una cifra de personas.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">Comfortable operating at a strategic level with senior stakeholders (VP Design, CXO, Product and Tech leaders) while remaining credible with practitioners.</p>
+          <p class="cv">El CV no nombra stakeholders, VP ni CXO.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts">1</div>
+        <div>
+          <p class="req">Fluent in English; French is a plus.</p>
+          <p class="cv">«English C1». French is a plus y el CV no nombra el francés.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">A sports and/or gaming fan at heart.</p>
+          <p class="cv">El CV no lo nombra.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req"><span class="tag">Required</span>Define and drive AI-native design standards and documentation readable, generated, and extended by AI inside Figma and beyond.</p>
+          <p class="cv">El CV no nombra AI.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req"><span class="tag">Required</span>Champion AI-powered workflows across the Design org, including design-to-code generation and automating repetitive production work in Offer Creative (visual assets, offer creatives, templated content).</p>
+          <p class="cv">El CV no nombra AI ni automatización.</p>
+        </div>
+      </div>
+      <p class="cv"><a href="https://jobs.intodesignsystems.com/jobs/betclic-group-head-of-design-ops-f-m-1s89su">Ficha de la oferta</a></p>
+    </section>
+
+    <section>
+      <h2 class="label">Amplify</h2>
+      <div class="filete"></div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">8+ years of relevant work experience.</p>
+          <p class="cv">«Seis años».</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">Relevant fields include Front-end Developer, UI Engineer, Design Technologist, or Design engineer.</p>
+          <p class="cv">Los roles del CV son Product Designer, Design Systems Designer y Lead de Design Systems.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">Fluent in Modern React, TypeScript, and JavaScript.</p>
+          <p class="cv">El CV no los nombra.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">Fluent in semantic HTML, CSS, and responsive design.</p>
+          <p class="cv">El CV no los nombra.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts mid">0,5</div>
+        <div>
+          <p class="req">Fluent in design systems architecture, reusable UI components, and design tokens.</p>
+          <p class="cv">«86 componentes», tokens y «Tokens en tres capas». No nombra design systems architecture.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts">1</div>
+        <div>
+          <p class="req">Fluent in Figma for design-to-code workflows.</p>
+          <p class="cv">«Seis años llevando librerías de Figma hasta el código.»</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">Fluent in Git and collaborative software development.</p>
+          <p class="cv">El CV nombra «GitHub». No nombra Git ni collaborative software development.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req">Fluent in frontend build tools, component packaging, and testing.</p>
+          <p class="cv">El CV nombra Storybook. No nombra build tools, packaging ni testing.</p>
+        </div>
+      </div>
+      <div class="line">
+        <div class="pts none">0</div>
+        <div>
+          <p class="req"><span class="tag">Required</span>Explore and implement AI-assisted development workflows to improve component development, testing, and documentation.</p>
+          <p class="cv">El CV no nombra AI.</p>
+        </div>
+      </div>
+      <p class="cv"><a href="https://jobs.intodesignsystems.com/jobs/amplify-senior-staff-engineer-design-systems-1dpwhz">Ficha de la oferta</a></p>
+    </section>
+
+    <p class="foot"><span>Datos de ejemplo · perfil ficticio</span><span>1 · 0,5 · 0</span></p>
+  </main>
+</body>
+</html>

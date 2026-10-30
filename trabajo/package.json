@@ -1,0 +1,28 @@
+{
+  "name": "candidatura",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.app.json --noEmit && vite build --base /candidatura-design-systems/",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource/geist": "*",
+    "@fontsource/geist-mono": "*",
+    "@phosphor-icons/react": "*",
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "*",
+    "@types/node": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@vitejs/plugin-react": "*",
+    "tailwindcss": "*",
+    "typescript": "*",
+    "vite": "*"
+  }
+}
