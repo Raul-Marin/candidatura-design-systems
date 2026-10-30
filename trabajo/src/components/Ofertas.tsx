@@ -1,5 +1,6 @@
 import { ArrowSquareOut, Check, Plus } from '@phosphor-icons/react'
 import { useState, type FormEvent } from 'react'
+import { catalog } from '../catalog'
 import {
   aiLabel,
   draftToOffer,
@@ -29,8 +30,25 @@ export function Ofertas({
   const [open, setOpen] = useState(false)
   const [draft, setDraft] = useState<DraftOffer>(emptyDraft)
   const [formError, setFormError] = useState<string | null>(null)
+  const [query, setQuery] = useState('')
   const selected = offers.find((offer) => offer.id === selectedId) ?? null
   const count = offers.length === 1 ? '1 oferta' : `${offers.length} ofertas`
+  const needle = query.trim().toLocaleLowerCase('es')
+  const listed = catalog.filter((offer) => {
+    if (!needle) return true
+    const title = offer.title.toLocaleLowerCase('es')
+    const company = offer.company.toLocaleLowerCase('es')
+    return title.includes(needle) || company.includes(needle)
+  })
+
+  function addFromCatalog(offer: Offer) {
+    if (offers.some((item) => item.id === offer.id)) return
+    onAdd({
+      ...offer,
+      score: { ...offer.score },
+      requirements: offer.requirements.map((item) => ({ ...item })),
+    })
+  }
 
   function patch(partial: Partial<DraftOffer>) {
     setDraft((current) => ({ ...current, ...partial }))
@@ -62,7 +80,8 @@ export function Ofertas({
           )
         }
       />
-      <p className="mb-4 font-mono text-[11px] text-muted">{count}</p>
+      <h3 className="text-base font-medium">Mesa</h3>
+      <p className="mb-4 mt-1 text-xs text-muted">{count}</p>
 
       {open && (
         <form
@@ -235,6 +254,68 @@ export function Ofertas({
           <TextButton onClick={() => onRemove(selected.id)}>Quitar de la lista</TextButton>
         </div>
       )}
+
+      <div className="mt-10">
+        <h3 className="text-base font-medium">Tablón</h3>
+        <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">
+          Listado externo. Añadir copia la oferta a la mesa.
+        </p>
+        <label className="mt-4 flex max-w-md flex-col gap-2">
+          <span className="text-xs text-muted">Buscar</span>
+          <input
+            className={controlClass}
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Puesto o empresa"
+          />
+        </label>
+
+        {listed.length === 0 ? (
+          <p className={`${surfaceClass} mt-4 text-sm text-ink`}>
+            Ninguna oferta coincide con la búsqueda.
+          </p>
+        ) : (
+          <div className="mt-4 divide-y divide-line border border-line">
+            {listed.map((offer) => {
+              const inMesa = offers.some((item) => item.id === offer.id)
+              return (
+                <div
+                  key={offer.id}
+                  className="flex flex-col gap-4 px-4 py-4 lg:flex-row lg:items-start lg:justify-between lg:px-6"
+                >
+                  <div className="min-w-0">
+                    <span className="block text-xs text-muted">Puesto</span>
+                    <span className="mt-1 block font-medium leading-snug">{offer.title}</span>
+                    <span className="mt-3 block text-xs text-muted">Empresa</span>
+                    <span className="mt-1 block text-sm">{offer.company}</span>
+                    <span className="mt-3 block text-sm leading-relaxed">
+                      {formatPosted(offer.posted)}
+                      {' · '}
+                      {locationLabel(offer.location)}
+                      {' · '}
+                      {workTypeLabel(offer.workType)}
+                      {' · '}
+                      {salaryLabel(offer.salary)}
+                    </span>
+                  </div>
+                  {inMesa ? (
+                    <QuietButton className="w-full shrink-0 sm:w-auto" disabled>
+                      En la mesa
+                    </QuietButton>
+                  ) : (
+                    <PrimaryButton
+                      className="w-full shrink-0 sm:w-auto"
+                      onClick={() => addFromCatalog(offer)}
+                    >
+                      Añadir
+                    </PrimaryButton>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </div>
     </section>
   )
 }

@@ -28,11 +28,19 @@ export function App() {
   }
 
   function addOffer(offer: Offer) {
+    const already = workspace!.offers.some((item) => item.id === offer.id)
+    if (already) {
+      update({ ...workspace!, selectedId: offer.id })
+      return
+    }
+    const tracks = workspace!.tracks[offer.id]
+      ? workspace!.tracks
+      : { ...workspace!.tracks, [offer.id]: emptyTrack() }
     update({
       ...workspace!,
       offers: [offer, ...workspace!.offers],
       selectedId: offer.id,
-      tracks: { ...workspace!.tracks, [offer.id]: emptyTrack() },
+      tracks,
     })
   }
 

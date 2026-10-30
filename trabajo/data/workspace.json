@@ -4,8 +4,28 @@
     "figmaUrl": "https://www.figma.com/design/0XOSRAgwF3H0IDk52e2iUp/CV-%E2%80%94-Design-Systems-Designer?node-id=2-27",
     "note": "Datos de ejemplo · perfil ficticio"
   },
-  "selectedId": "vanguard-principal-ux-designer-design-systems-1hrbk8",
+  "selectedId": "betclic-group-head-of-design-ops-f-m-1s89su",
   "offers": [
+    {
+      "id": "betclic-group-head-of-design-ops-f-m-1s89su",
+      "posted": "2026-10-29",
+      "title": "Head of Design Ops F/M",
+      "company": "Betclic Group",
+      "location": "Bordeaux",
+      "workType": "hybrid",
+      "workNote": "4 days per month on site",
+      "salary": null,
+      "aiSkills": true,
+      "applyUrl": null,
+      "detailUrl": "https://jobs.intodesignsystems.com/jobs/betclic-group-head-of-design-ops-f-m-1s89su",
+      "score": {
+        "value": 1.5,
+        "of": 10,
+        "basis": "CV original"
+      },
+      "requirements": [],
+      "note": "La ficha pide al menos 10 años, inglés obligatorio, francés como plus, y 3 líneas de IA required. El desglose línea a línea no está guardado aquí."
+    },
     {
       "id": "vanguard-principal-ux-designer-design-systems-1hrbk8",
       "posted": "2026-10-30",
@@ -58,51 +78,6 @@
         }
       ],
       "notStated": "La oferta no publica salario, tipo de contrato, años exigidos, reubicación ni fecha límite. No hay patrocinio de visado."
-    },
-    {
-      "id": "betclic-group-head-of-design-ops-f-m-1s89su",
-      "posted": "2026-10-29",
-      "title": "Head of Design Ops F/M",
-      "company": "Betclic Group",
-      "location": "Bordeaux",
-      "workType": "hybrid",
-      "workNote": "4 days per month on site",
-      "salary": null,
-      "aiSkills": true,
-      "applyUrl": null,
-      "detailUrl": "https://jobs.intodesignsystems.com/jobs/betclic-group-head-of-design-ops-f-m-1s89su",
-      "score": {
-        "value": 1.5,
-        "of": 10,
-        "basis": "CV original"
-      },
-      "requirements": [],
-      "note": "La ficha pide al menos 10 años, inglés obligatorio, francés como plus, y 3 líneas de IA required. El desglose línea a línea no está guardado aquí."
-    },
-    {
-      "id": "amplify-senior-staff-engineer-design-systems-1dpwhz",
-      "posted": "2026-10-28",
-      "title": "Senior Staff Engineer, Design Systems",
-      "company": "Amplify",
-      "location": null,
-      "workType": null,
-      "workNote": "La oferta no indica si es remoto, híbrido o presencial.",
-      "salary": null,
-      "aiSkills": true,
-      "applyUrl": null,
-      "detailUrl": "https://jobs.intodesignsystems.com/jobs/amplify-senior-staff-engineer-design-systems-1dpwhz",
-      "score": {
-        "value": 1.5,
-        "of": 9,
-        "basis": "CV original"
-      },
-      "requirements": [
-        {
-          "text": "Explore and implement AI-assisted development workflows to improve component development, testing, and documentation.",
-          "points": 0
-        }
-      ],
-      "note": "8+ años. Campos: Front-end Developer, UI Engineer, Design Technologist o Design engineer. El resto del desglose no está guardado aquí."
     }
   ],
   "tracks": {
@@ -123,6 +98,19 @@
           "text": "Oferta publicada el 30 oct 2026. CV de Figma adaptado a esta oferta. No se ha enviado ningún email."
         }
       ]
+    },
+    "betclic-group-head-of-design-ops-f-m-1s89su": {
+      "estado": "",
+      "lugar": "",
+      "puesto": "",
+      "tipo": "",
+      "web": "",
+      "emails": "",
+      "primerEmail": "",
+      "followup": "",
+      "primeraActividad": "",
+      "ultimaActividad": "",
+      "diario": []
     }
   }
 }
