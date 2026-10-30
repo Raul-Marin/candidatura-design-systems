@@ -24,11 +24,17 @@ export function CvScore({
           </div>
 
           <div className={surfaceClass}>
-            <p className="font-mono text-xs text-ink">{offer.score.basis}</p>
-            <p className="mt-2 font-mono text-2xl font-medium text-ink">
-              {formatScore(offer.score.value)}
-              <span className="text-base">/{offer.score.of}</span>
-            </p>
+            {offer.score ? (
+              <>
+                <p className="font-mono text-xs text-ink">{offer.score.basis}</p>
+                <p className="mt-2 font-mono text-2xl font-medium text-ink">
+                  {formatScore(offer.score.value)}
+                  <span className="text-base">/{offer.score.of}</span>
+                </p>
+              </>
+            ) : (
+              <p className="text-sm text-ink">Sin puntuación guardada.</p>
+            )}
 
             {offer.requirements.length > 0 && (
               <div className="mt-6">

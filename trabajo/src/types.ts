@@ -23,7 +23,7 @@ export type Offer = {
   aiSkills: boolean
   applyUrl: string | null
   detailUrl: string | null
-  score: Score
+  score: Score | null
   requirements: Requirement[]
   note?: string
   notStated?: string

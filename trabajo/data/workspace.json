@@ -4,8 +4,33 @@
     "figmaUrl": "https://www.figma.com/design/0XOSRAgwF3H0IDk52e2iUp/CV-%E2%80%94-Design-Systems-Designer?node-id=2-27",
     "note": "Datos de ejemplo · perfil ficticio"
   },
-  "selectedId": "betclic-group-head-of-design-ops-f-m-1s89su",
+  "selectedId": "amplify-senior-staff-engineer-design-systems-1dpwhz",
   "offers": [
+    {
+      "id": "amplify-senior-staff-engineer-design-systems-1dpwhz",
+      "posted": "2026-10-28",
+      "title": "Senior Staff Engineer, Design Systems",
+      "company": "Amplify",
+      "location": "Remote, USA",
+      "workType": "remote",
+      "workNote": null,
+      "salary": null,
+      "aiSkills": true,
+      "applyUrl": null,
+      "detailUrl": "https://jobs.intodesignsystems.com/jobs/amplify-senior-staff-engineer-design-systems-1dpwhz",
+      "score": {
+        "value": 1.5,
+        "of": 9,
+        "basis": "CV original"
+      },
+      "requirements": [
+        {
+          "text": "Explore and implement AI-assisted development workflows to improve component development, testing, and documentation.",
+          "points": 0
+        }
+      ],
+      "note": "8+ años. Campos: Front-end Developer, UI Engineer, Design Technologist o Design engineer. El resto del desglose no está guardado aquí."
+    },
     {
       "id": "betclic-group-head-of-design-ops-f-m-1s89su",
       "posted": "2026-10-29",
@@ -100,6 +125,19 @@
       ]
     },
     "betclic-group-head-of-design-ops-f-m-1s89su": {
+      "estado": "",
+      "lugar": "",
+      "puesto": "",
+      "tipo": "",
+      "web": "",
+      "emails": "",
+      "primerEmail": "",
+      "followup": "",
+      "primeraActividad": "",
+      "ultimaActividad": "",
+      "diario": []
+    },
+    "amplify-senior-staff-engineer-design-systems-1dpwhz": {
       "estado": "",
       "lugar": "",
       "puesto": "",

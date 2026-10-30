@@ -26,7 +26,7 @@ npm run dev
 
 El desarrollo queda en http://127.0.0.1:4740/
 
-1. Ofertas. Lista las ofertas de la mesa, marca la seleccionada y permite añadir otra. En Ofertas, Añadir copia una oferta del tablón precargado a la mesa. El salario vacío se muestra como «No publicado» y la modalidad vacía como «No indicada».
+1. Ofertas. El tablón lista las ofertas de la semana y la oferta seleccionada queda encima de la lista. Añadir copia una oferta del tablón a la mesa. El salario vacío se muestra como «No publicado» y la modalidad vacía como «No indicada».
 2. CV. Muestra el score del CV original contra la oferta elegida (Vanguard: 4,5/8) y el desglose por línea cuando existe. El panel de Figma enseña el CV.
 3. Seguimiento. Ficha de esa oferta: estado, puesto, lugar, web, fechas, correos y diario. El estado empieza vacío. No pasa a «Enviada» solo.
 

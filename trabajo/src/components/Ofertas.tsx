@@ -1,4 +1,4 @@
-import { ArrowSquareOut, Check, Plus } from '@phosphor-icons/react'
+import { ArrowSquareOut, Plus } from '@phosphor-icons/react'
 import { useState, type FormEvent } from 'react'
 import { catalog } from '../catalog'
 import {
@@ -45,7 +45,7 @@ export function Ofertas({
     if (offers.some((item) => item.id === offer.id)) return
     onAdd({
       ...offer,
-      score: { ...offer.score },
+      score: offer.score ? { ...offer.score } : null,
       requirements: offer.requirements.map((item) => ({ ...item })),
     })
   }
@@ -80,8 +80,35 @@ export function Ofertas({
           )
         }
       />
+      {selected && (
+        <div className="mb-8 border border-line px-4 py-4 lg:px-6">
+          <p className="text-sm leading-relaxed">
+            <span className="font-medium">{selected.company}</span>
+            {' · '}
+            {selected.title}
+            {' · '}
+            Seleccionada
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+            {selected.detailUrl && (
+              <a className={linkClass} href={selected.detailUrl} target="_blank" rel="noreferrer">
+                Ficha en el tablero
+                <ArrowSquareOut size={16} weight="regular" aria-hidden="true" />
+              </a>
+            )}
+            {selected.applyUrl && (
+              <a className={linkClass} href={selected.applyUrl} target="_blank" rel="noreferrer">
+                Página de la empresa
+                <ArrowSquareOut size={16} weight="regular" aria-hidden="true" />
+              </a>
+            )}
+            <TextButton onClick={() => onRemove(selected.id)}>Quitar de la lista</TextButton>
+          </div>
+        </div>
+      )}
+
       <h3 className="text-base font-medium">Mesa</h3>
-      <p className="mb-4 mt-1 text-xs text-muted">{count}</p>
+      <p className="mt-1 text-xs text-muted">{count}</p>
 
       {open && (
         <form
@@ -167,96 +194,31 @@ export function Ofertas({
       )}
 
       {offers.length === 0 ? (
-        <p className={`${surfaceClass} text-sm text-muted`}>
-          No hay ofertas. Añade una para empezar.
-        </p>
+        <p className="mt-3 text-sm text-ink">No hay ofertas en la mesa.</p>
       ) : (
-        <div className="divide-y divide-line border border-line">
-          {offers.map((offer) => {
-            const active = offer.id === selectedId
-            return (
+        <ul className="mt-3 flex flex-col gap-2">
+          {offers.map((offer) => (
+            <li key={offer.id}>
               <button
-                key={offer.id}
                 type="button"
                 onClick={() => onSelect(offer.id)}
-                aria-pressed={active}
-                className={`flex w-full origin-left cursor-pointer flex-col gap-3 px-4 py-4 text-left text-ink transition-colors duration-150 active:scale-[0.98] lg:px-6 ${
-                  active ? 'bg-[#e7e5e4] shadow-[inset_0_0_0_2px_#78716c]' : 'hover:bg-[#fafaf9]'
-                }`}
+                aria-pressed={offer.id === selectedId}
+                className="max-w-full cursor-pointer text-left text-sm leading-snug text-ink"
               >
-                <span className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                  <span className="min-w-0">
-                    <span className="block text-xs text-muted">Puesto</span>
-                    <span className="mt-1 flex flex-wrap items-center gap-2 font-medium leading-snug">
-                      {offer.title}
-                      {active && (
-                        <span className="inline-flex items-center gap-1 text-xs font-normal text-ink">
-                          <Check size={14} weight="regular" aria-hidden="true" />
-                          Seleccionada
-                        </span>
-                      )}
-                    </span>
-                  </span>
-                  <span className="shrink-0 sm:text-right">
-                    <span className="block text-xs text-muted">Fecha</span>
-                    <span className="mt-1 block font-mono text-xs">{formatPosted(offer.posted)}</span>
-                  </span>
-                </span>
-                <span>
-                  <span className="block text-xs text-muted">Empresa</span>
-                  <span className="mt-1 block text-sm">{offer.company}</span>
-                </span>
-                <span className="grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
-                  <span className="min-w-0">
-                    <span className="block text-xs text-muted">Lugar</span>
-                    <span className={`mt-1 block text-sm ${offer.location ? '' : 'text-muted'}`}>
-                      {locationLabel(offer.location)}
-                    </span>
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-xs text-muted">Modalidad</span>
-                    <span className="mt-1 block text-sm">{workTypeLabel(offer.workType)}</span>
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-xs text-muted">Pide IA</span>
-                    <span className="mt-1 block text-sm text-ink">{aiLabel(offer.aiSkills)}</span>
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-xs text-muted">Salario</span>
-                    <span className={`mt-1 block text-sm ${offer.salary ? '' : 'text-muted'}`}>
-                      {salaryLabel(offer.salary)}
-                    </span>
-                  </span>
-                </span>
-                {offer.workNote && (
-                  <span className="text-xs leading-snug text-muted">{offer.workNote}</span>
-                )}
+                {offer.company}
+                {' · '}
+                {offer.title}
               </button>
-            )
-          })}
-        </div>
-      )}
-
-      {selected && (
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4">
-          {selected.detailUrl && (
-            <a className={linkClass} href={selected.detailUrl} target="_blank" rel="noreferrer">
-              Ficha en el tablero
-              <ArrowSquareOut size={16} weight="regular" aria-hidden="true" />
-            </a>
-          )}
-          {selected.applyUrl && (
-            <a className={linkClass} href={selected.applyUrl} target="_blank" rel="noreferrer">
-              Página de la empresa
-              <ArrowSquareOut size={16} weight="regular" aria-hidden="true" />
-            </a>
-          )}
-          <TextButton onClick={() => onRemove(selected.id)}>Quitar de la lista</TextButton>
-        </div>
+            </li>
+          ))}
+        </ul>
       )}
 
       <div className="mt-10">
         <h3 className="text-base font-medium">Tablón</h3>
+        <p className="mt-1 text-xs text-muted">
+          {catalog.length === 1 ? '1 oferta' : `${catalog.length} ofertas`}
+        </p>
         <p className="mt-1 max-w-xl text-sm leading-relaxed text-muted">
           Listado externo. Añadir copia la oferta a la mesa.
         </p>
@@ -284,24 +246,22 @@ export function Ofertas({
                   className="flex flex-col gap-4 px-4 py-4 lg:flex-row lg:items-start lg:justify-between lg:px-6"
                 >
                   <div className="min-w-0">
-                    <span className="block text-xs text-muted">Puesto</span>
-                    <span className="mt-1 block font-medium leading-snug">{offer.title}</span>
-                    <span className="mt-3 block text-xs text-muted">Empresa</span>
-                    <span className="mt-1 block text-sm">{offer.company}</span>
-                    <span className="mt-3 block text-sm leading-relaxed">
+                    <p className="font-medium leading-snug break-words">{offer.title}</p>
+                    <p className="mt-1 text-sm break-words">{offer.company}</p>
+                    <p className="mt-1 text-sm leading-relaxed break-words">
                       {formatPosted(offer.posted)}
                       {' · '}
                       {locationLabel(offer.location)}
                       {' · '}
                       {workTypeLabel(offer.workType)}
                       {' · '}
+                      {aiLabel(offer.aiSkills)}
+                      {' · '}
                       {salaryLabel(offer.salary)}
-                    </span>
+                    </p>
                   </div>
                   {inMesa ? (
-                    <QuietButton className="w-full shrink-0 sm:w-auto" disabled>
-                      En la mesa
-                    </QuietButton>
+                    <p className="shrink-0 text-sm text-ink">En la mesa</p>
                   ) : (
                     <PrimaryButton
                       className="w-full shrink-0 sm:w-auto"
