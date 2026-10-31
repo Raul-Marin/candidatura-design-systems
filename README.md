@@ -39,6 +39,19 @@ En local los datos están en `trabajo/data/workspace.json`. La app los lee y esc
 
 ## Agente y skills
 
+### Descargar el agente y las skills
+
+Zip con el agente, las tres skills y un `LEEME.md`. Descomprímelo en la raíz de tu proyecto en Cursor y queda la carpeta `.cursor/` lista.
+
+- [candidatura-agente-skills.zip](https://github.com/Raul-Marin/candidatura-design-systems/raw/main/descargas/candidatura-agente-skills.zip)
+- También desde el sitio: https://raul-marin.github.io/candidatura-design-systems/candidatura-agente-skills.zip
+
+```bash
+unzip candidatura-agente-skills.zip -d /ruta/a/tu-proyecto
+```
+
+### Copiar a mano
+
 Copia estas rutas al `.cursor/` de otro proyecto:
 
 - `.cursor/agents/candidatura-design-systems.md`
