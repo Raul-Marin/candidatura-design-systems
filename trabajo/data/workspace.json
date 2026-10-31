@@ -4,8 +4,24 @@
     "figmaUrl": "https://www.figma.com/design/0XOSRAgwF3H0IDk52e2iUp/CV-%E2%80%94-Design-Systems-Designer?node-id=2-27",
     "note": "Datos de ejemplo · perfil ficticio"
   },
-  "selectedId": "amplify-senior-staff-engineer-design-systems-1dpwhz",
+  "selectedId": "week-2026-10-28-knowledgecity-lead-product-designer-ai-native",
   "offers": [
+    {
+      "id": "week-2026-10-28-knowledgecity-lead-product-designer-ai-native",
+      "posted": "2026-10-28",
+      "title": "Lead Product Designer - AI-Native",
+      "company": "KnowledgeCity",
+      "location": "Remote, Pakistan",
+      "workType": "remote",
+      "workNote": null,
+      "salary": null,
+      "aiSkills": true,
+      "applyUrl": null,
+      "detailUrl": null,
+      "cvFigmaUrl": "https://www.figma.com/design/0XOSRAgwF3H0IDk52e2iUp/?node-id=109-206",
+      "score": null,
+      "requirements": []
+    },
     {
       "id": "amplify-senior-staff-engineer-design-systems-1dpwhz",
       "posted": "2026-10-28",
@@ -18,6 +34,7 @@
       "aiSkills": true,
       "applyUrl": null,
       "detailUrl": "https://jobs.intodesignsystems.com/jobs/amplify-senior-staff-engineer-design-systems-1dpwhz",
+      "cvFigmaUrl": "https://www.figma.com/design/0XOSRAgwF3H0IDk52e2iUp/?node-id=109-163",
       "score": {
         "value": 1.5,
         "of": 9,
@@ -43,6 +60,7 @@
       "aiSkills": true,
       "applyUrl": null,
       "detailUrl": "https://jobs.intodesignsystems.com/jobs/betclic-group-head-of-design-ops-f-m-1s89su",
+      "cvFigmaUrl": "https://www.figma.com/design/0XOSRAgwF3H0IDk52e2iUp/?node-id=109-120",
       "score": {
         "value": 1.5,
         "of": 10,
@@ -63,6 +81,7 @@
       "aiSkills": false,
       "applyUrl": "https://vanguard.wd5.myworkdayjobs.com/vanguard_external/job/Malvern-PA/Principal-UX-Designer--Design-Systems_166007-1",
       "detailUrl": "https://jobs.intodesignsystems.com/jobs/vanguard-principal-ux-designer-design-systems-1hrbk8",
+      "cvFigmaUrl": "https://www.figma.com/design/0XOSRAgwF3H0IDk52e2iUp/?node-id=2-27",
       "score": {
         "value": 4.5,
         "of": 8,
@@ -121,6 +140,10 @@
         {
           "date": "2026-10-30",
           "text": "Oferta publicada el 30 oct 2026. CV de Figma adaptado a esta oferta. No se ha enviado ningún email."
+        },
+        {
+          "date": "2026-10-31",
+          "text": "Comprobación de que el diario se guarda."
         }
       ]
     },
@@ -138,6 +161,19 @@
       "diario": []
     },
     "amplify-senior-staff-engineer-design-systems-1dpwhz": {
+      "estado": "",
+      "lugar": "",
+      "puesto": "",
+      "tipo": "",
+      "web": "",
+      "emails": "",
+      "primerEmail": "",
+      "followup": "",
+      "primeraActividad": "",
+      "ultimaActividad": "",
+      "diario": []
+    },
+    "week-2026-10-28-knowledgecity-lead-product-designer-ai-native": {
       "estado": "",
       "lugar": "",
       "puesto": "",

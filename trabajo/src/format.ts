@@ -1,4 +1,4 @@
-import type { Offer, WorkType } from './types'
+import type { WorkType } from './types'
 
 export function todayISO(): string {
   const now = new Date()
@@ -46,24 +46,6 @@ export function aiLabel(aiSkills: boolean): string {
   return aiSkills ? 'Pide IA' : 'No pide IA'
 }
 
-export function offerId(company: string, title: string, existing: string[]): string {
-  const base =
-    `${company} ${title}`
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '')
-      .slice(0, 60) || 'oferta'
-  let id = base
-  let n = 2
-  while (existing.includes(id)) {
-    id = `${base}-${n}`
-    n += 1
-  }
-  return id
-}
-
 export function figmaEmbedSrc(fileUrl: string): string {
   const trimmed = fileUrl.trim()
   if (trimmed.includes('figma.com/embed')) return trimmed
@@ -74,44 +56,4 @@ export function figmaEmbedSrc(fileUrl: string): string {
     decoded = trimmed
   }
   return `https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(decoded)}`
-}
-
-export type DraftOffer = {
-  posted: string
-  title: string
-  company: string
-  location: string
-  workType: '' | WorkType
-  aiSkills: boolean
-  salary: string
-}
-
-export function emptyDraft(): DraftOffer {
-  return {
-    posted: todayISO(),
-    title: '',
-    company: '',
-    location: '',
-    workType: '',
-    aiSkills: false,
-    salary: '',
-  }
-}
-
-export function draftToOffer(draft: DraftOffer, existingIds: string[]): Offer {
-  return {
-    id: offerId(draft.company, draft.title, existingIds),
-    posted: draft.posted,
-    title: draft.title.trim(),
-    company: draft.company.trim(),
-    location: draft.location.trim() || null,
-    workType: draft.workType || null,
-    workNote: null,
-    salary: draft.salary.trim() || null,
-    aiSkills: draft.aiSkills,
-    applyUrl: null,
-    detailUrl: null,
-    score: { value: 0, of: 0, basis: 'CV original' },
-    requirements: [],
-  }
 }

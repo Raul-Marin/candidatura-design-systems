@@ -28,6 +28,7 @@ export type Offer = {
   note?: string
   notStated?: string
   adaptNote?: string
+  cvFigmaUrl?: string
 }
 
 export type DiarioEntry = {
@@ -69,8 +70,6 @@ export type Workspace = {
   offers: Offer[]
   tracks: Record<string, Track>
 }
-
-export type Step = 'ofertas' | 'cv' | 'seguimiento'
 
 export function emptyTrack(): Track {
   return {

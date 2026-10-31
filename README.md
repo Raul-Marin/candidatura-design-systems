@@ -1,6 +1,6 @@
 # Candidatura de design systems
 
-Ejercicio de clase: un escritorio de tres pasos (Ofertas, CV, Seguimiento) y un agente de Cursor con tres skills. Los datos de ejemplo son de un perfil ficticio. El 4,5/8 es el score del CV original, no de un CV reescrito. No hay ninguna candidatura enviada.
+Ejercicio de clase: un escritorio de candidaturas (Resumen, CV y Seguimiento por oferta) y un agente de Cursor con tres skills. Los datos de ejemplo son de un perfil ficticio. El 4,5/8 es el score del CV original, no de un CV reescrito. No hay ninguna candidatura enviada.
 
 ## Sitio
 
@@ -26,11 +26,16 @@ npm run dev
 
 El desarrollo queda en http://127.0.0.1:4740/
 
-1. Ofertas. El tablón lista las ofertas de la semana y la oferta seleccionada queda encima de la lista. Añadir copia una oferta del tablón a la mesa. El salario vacío se muestra como «No publicado» y la modalidad vacía como «No indicada».
-2. CV. Muestra el score del CV original contra la oferta elegida (Vanguard: 4,5/8) y el desglose por línea cuando existe. El panel de Figma enseña el CV.
-3. Seguimiento. Ficha de esa oferta: estado, puesto, lugar, web, fechas, correos y diario. El estado empieza vacío. No pasa a «Enviada» solo.
+- Mis candidaturas. A la izquierda, las ofertas que tienes en la mesa. Al elegir una se abre su ficha.
+- Buscar ofertas. En la barra superior. Abre el tablón con las ofertas de la semana y añade una a la mesa. El salario vacío se muestra como «No publicado» y la modalidad vacía como «No indicada».
+- La ficha tiene tres pestañas:
+  1. Resumen. Datos de la oferta y estado.
+  2. CV. Score del CV original contra la oferta (Vanguard: 4,5/8), desglose por línea cuando existe y el CV de Figma de esa oferta.
+  3. Seguimiento. Estado, puesto, lugar, web, fechas, correos y diario. El estado empieza vacío. No pasa a «Enviada» solo.
 
-En local los datos están en `trabajo/data/workspace.json`. La app los lee y escribe por `/api/workspace` mientras corre `npm run dev`. En GitHub Pages no hay ese API: se carga el mismo JSON y cada cambio se guarda en `localStorage` de ese navegador. La interfaz lo dice en el lateral.
+Cada oferta tiene su propio CV de Figma (`cvFigmaUrl`). Los datos de ejemplo traen cuatro: KnowledgeCity, Amplify, Betclic y Vanguard.
+
+En local los datos están en `trabajo/data/workspace.json`. La app los lee y escribe por `/api/workspace` mientras corre `npm run dev`. En GitHub Pages no hay ese API: se carga el mismo JSON y cada cambio se guarda en `localStorage` de ese navegador. La interfaz lo dice en la barra superior.
 
 ## Agente y skills
 

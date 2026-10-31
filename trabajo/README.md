@@ -1,6 +1,6 @@
 # Candidatura
 
-Superficie local para trabajar una candidatura de design systems: ofertas, CV y seguimiento en la misma pantalla. El CV de Figma permanece visible.
+Superficie local para trabajar una candidatura de design systems: tus candidaturas a la izquierda y la ficha de cada una con Resumen, CV y Seguimiento.
 
 ## Cómo arrancar
 
@@ -26,10 +26,13 @@ La interfaz carga el archivo al abrir y guarda cada edición unos 400 ms despué
 
 En el build de GitHub Pages no existe `/api/workspace`. Ahí se usa el mismo JSON como archivo estático y los cambios quedan en `localStorage` de ese navegador.
 
-## Los tres pasos
+## Estructura
 
-1. Ofertas. Lista, selección y alta.
-2. CV. Puntuación del CV original frente a la oferta elegida, y notas de adaptación.
-3. Seguimiento. Ficha editable de esa oferta.
+- Mis candidaturas. Lista lateral de las ofertas en la mesa. Por debajo de 1024 px pasa a un selector arriba.
+- Ficha de la candidatura, con tres pestañas:
+  1. Resumen. Datos de la oferta y estado.
+  2. CV. Puntuación del CV original frente a la oferta y el CV de Figma de esa oferta.
+  3. Seguimiento. Ficha editable: estado, fechas, correos y diario.
+- Buscar ofertas. Botón de la barra superior que abre el tablón y añade una oferta a la mesa.
 
-En pantallas grandes el CV queda a la derecha. Por debajo de 1024 px el CV pasa debajo del paso activo, y los pasos quedan arriba.
+Cada oferta guarda su propio CV de Figma en `cvFigmaUrl`. Si no lo tiene, se usa el `figmaUrl` general del CV.

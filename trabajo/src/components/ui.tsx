@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, ReactNode, Ref } from 'react'
 
 const press =
   'cursor-pointer transition-transform duration-150 ease-out active:scale-[0.98] disabled:cursor-not-allowed disabled:active:scale-100'
@@ -13,11 +13,14 @@ export const linkClass =
 
 export const surfaceClass = 'border border-line px-4 py-4 lg:px-6'
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  ref?: Ref<HTMLButtonElement>
+}
 
-export function PrimaryButton({ className = '', type = 'button', ...props }: ButtonProps) {
+export function PrimaryButton({ className = '', type = 'button', ref, ...props }: ButtonProps) {
   return (
     <button
+      ref={ref}
       type={type}
       className={`inline-flex items-center justify-center gap-2 rounded-[2px] bg-ink px-3 py-2 text-sm text-paper ${press} ${className}`}
       {...props}
@@ -62,22 +65,3 @@ export function Field({
   )
 }
 
-export function StepHeading({
-  num,
-  title,
-  action,
-}: {
-  num: string
-  title: string
-  action?: ReactNode
-}) {
-  return (
-    <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-      <div>
-        <p className="font-mono text-xs text-muted">{num}</p>
-        <h2 className="mt-1 text-xl font-medium leading-tight">{title}</h2>
-      </div>
-      {action}
-    </div>
-  )
-}

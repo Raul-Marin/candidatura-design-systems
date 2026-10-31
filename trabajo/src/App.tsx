@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import { CvScore } from './components/CvScore'
-import { FigmaPane } from './components/FigmaPane'
-import { Ofertas } from './components/Ofertas'
-import { Rail } from './components/Rail'
-import { Seguimiento } from './components/Seguimiento'
+import { useRef, useState } from 'react'
+import { Candidaturas } from './components/Candidaturas'
+import { CatalogSheet } from './components/CatalogSheet'
+import { OfferWorkspace } from './components/OfferWorkspace'
+import { TopBar } from './components/TopBar'
 import { PrimaryButton } from './components/ui'
-import type { Offer, Step } from './types'
+import type { Offer } from './types'
 import { emptyTrack } from './types'
 import { useWorkspace } from './useWorkspace'
 
 export function App() {
   const { workspace, loading, error, saveState, inBrowser, update, reload } = useWorkspace()
-  const [step, setStep] = useState<Step>('ofertas')
+  const [sheetOpen, setSheetOpen] = useState(false)
+  const searchRef = useRef<HTMLButtonElement>(null)
 
   if (loading && !workspace) return <Skeleton />
   if (!workspace) return <LoadError message={error} onRetry={reload} />
@@ -64,49 +64,63 @@ export function App() {
   }
 
   return (
-    <div className="mx-auto flex min-h-[100dvh] w-full max-w-[1440px] flex-col bg-paper text-ink lg:flex-row">
-      <Rail
-        step={step}
-        onStep={setStep}
-        selected={selected}
+    <div className="mx-auto flex min-h-[100dvh] w-full max-w-[1440px] flex-col bg-paper text-ink">
+      <TopBar
         saveState={saveState}
         inBrowser={inBrowser}
+        onSearch={() => setSheetOpen(true)}
+        searchRef={searchRef}
       />
-      <main className="min-w-0 flex-1 px-5 py-6 sm:px-8 sm:py-8">
-        {error && (
-          <p className="mb-4 border border-line px-4 py-2 text-sm text-ink lg:px-6" role="alert">
-            {error}
-          </p>
-        )}
-        <div key={step} className="step-in">
-          {step === 'ofertas' && (
-            <Ofertas
-              offers={workspace.offers}
-              selectedId={workspace.selectedId}
-              onSelect={selectOffer}
-              onAdd={addOffer}
-              onRemove={removeOffer}
-            />
-          )}
-          {step === 'cv' && <CvScore offer={selected} onAdaptNote={setAdaptNote} />}
-          {step === 'seguimiento' && (
-            <Seguimiento
+      {error && (
+        <p className="border-b border-line px-4 py-3 text-sm text-ink lg:px-8" role="alert">
+          {error}
+        </p>
+      )}
+      <div className="flex min-w-0 flex-1 flex-col lg:flex-row">
+        <Candidaturas
+          offers={workspace.offers}
+          tracks={workspace.tracks}
+          selectedId={workspace.selectedId}
+          onSelect={selectOffer}
+        />
+        <main className="min-w-0 flex-1 px-4 py-6 lg:px-8 lg:py-8">
+          {selected && track ? (
+            <OfferWorkspace
               offer={selected}
               track={track}
-              onChange={(next) => {
-                if (!selected) return
+              cv={workspace.cv}
+              onRemove={() => removeOffer(selected.id)}
+              onTrack={(next) =>
                 update({
                   ...workspace,
                   tracks: { ...workspace.tracks, [selected.id]: next },
                 })
-              }}
+              }
+              onAdaptNote={setAdaptNote}
+              onFigmaUrl={(figmaUrl) =>
+                update({
+                  ...workspace,
+                  offers: workspace.offers.map((offer) =>
+                    offer.id === selected.id
+                      ? { ...offer, cvFigmaUrl: figmaUrl || undefined }
+                      : offer,
+                  ),
+                })
+              }
             />
+          ) : (
+            <p className="max-w-md text-sm leading-relaxed text-ink">
+              No hay una candidatura abierta. Usa Buscar ofertas para traer una del tablón.
+            </p>
           )}
-        </div>
-      </main>
-      <FigmaPane
-        cv={workspace.cv}
-        onFigmaUrl={(figmaUrl) => update({ ...workspace, cv: { ...workspace.cv, figmaUrl } })}
+        </main>
+      </div>
+      <CatalogSheet
+        open={sheetOpen}
+        offers={workspace.offers}
+        onAdd={addOffer}
+        onClose={() => setSheetOpen(false)}
+        returnFocus={searchRef}
       />
     </div>
   )
@@ -114,18 +128,17 @@ export function App() {
 
 function Skeleton() {
   return (
-    <div
-      className="mx-auto flex min-h-[100dvh] w-full max-w-[1440px] flex-col lg:flex-row"
-      aria-busy="true"
-    >
+    <div className="mx-auto flex min-h-[100dvh] w-full max-w-[1440px] flex-col" aria-busy="true">
       <p className="sr-only">Cargando el espacio de trabajo</p>
-      <div className="h-28 animate-pulse border-b border-line bg-line/40 lg:h-auto lg:w-56 lg:border-b-0 lg:border-r" />
-      <div className="flex-1 space-y-4 px-5 py-8 sm:px-8">
-        <div className="h-3 w-16 animate-pulse bg-line" />
-        <div className="h-8 w-40 animate-pulse bg-line" />
-        <div className="h-48 animate-pulse bg-line/70" />
+      <div className="h-16 animate-pulse border-b border-line bg-line/40" />
+      <div className="flex flex-1 flex-col lg:flex-row">
+        <div className="h-28 animate-pulse border-b border-line bg-line/30 lg:h-auto lg:w-80 lg:border-b-0 lg:border-r" />
+        <div className="flex-1 space-y-4 px-4 py-8 lg:px-8">
+          <div className="h-8 w-64 animate-pulse bg-line" />
+          <div className="h-4 w-40 animate-pulse bg-line" />
+          <div className="h-48 animate-pulse bg-line/70" />
+        </div>
       </div>
-      <div className="min-h-[320px] w-full animate-pulse border-t border-line bg-line/30 lg:w-[42%] lg:border-t-0 lg:border-l" />
     </div>
   )
 }
