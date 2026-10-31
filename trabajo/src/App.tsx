@@ -102,7 +102,7 @@ export function App() {
                   ...workspace,
                   offers: workspace.offers.map((offer) =>
                     offer.id === selected.id
-                      ? { ...offer, cvFigmaUrl: figmaUrl || undefined }
+                      ? { ...offer, cvFigmaUrl: figmaUrl }
                       : offer,
                   ),
                 })

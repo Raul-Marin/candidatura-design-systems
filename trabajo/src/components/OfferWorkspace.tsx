@@ -85,7 +85,11 @@ export function OfferWorkspace({
       </header>
 
       <div className="-mx-4 mt-6 overflow-x-auto px-4 lg:mx-0 lg:px-0">
-        <div role="tablist" aria-label="Ficha de la candidatura" className="flex w-max min-w-full gap-1">
+        <div
+          role="tablist"
+          aria-label="Ficha de la candidatura"
+          className="inline-flex w-max gap-1 rounded-[2px] border border-stone-500 bg-white p-1"
+        >
           {tabs.map((item) => {
             const selected = tab === item.id
             return (
@@ -99,8 +103,8 @@ export function OfferWorkspace({
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setTab(item.id)}
                 onKeyDown={(event) => onTabKey(event, item.id)}
-                className={`shrink-0 cursor-pointer whitespace-nowrap border-b-2 px-3 py-3 text-sm text-ink ${
-                  selected ? 'border-ink font-medium' : 'border-transparent'
+                className={`inline-flex min-h-10 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-[2px] px-4 text-sm font-medium transition-colors ${
+                  selected ? 'bg-ink text-paper' : 'text-ink hover:bg-stone-200 active:bg-stone-300'
                 }`}
               >
                 {item.label}

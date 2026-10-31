@@ -47,6 +47,18 @@ async function loadSeed(signal?: AbortSignal): Promise<Workspace> {
   return data
 }
 
+function withSeedDefaults(stored: Workspace, seed: Workspace): Workspace {
+  const seedOffers = new Map(seed.offers.map((offer) => [offer.id, offer]))
+  return {
+    ...stored,
+    cv: { ...seed.cv, ...stored.cv },
+    offers: stored.offers.map((offer) => {
+      const seeded = seedOffers.get(offer.id)
+      return seeded ? { ...seeded, ...offer } : offer
+    }),
+  }
+}
+
 function aborted(signal: AbortSignal | undefined, err: unknown) {
   return signal?.aborted === true || (err instanceof DOMException && err.name === 'AbortError')
 }
@@ -71,8 +83,15 @@ export async function loadWorkspace(
       throw err
     }
     const stored = readStored()
-    if (stored) return { workspace: stored, source: 'browser' }
-    return { workspace: await loadSeed(signal), source: 'browser' }
+    let seed: Workspace
+    try {
+      seed = await loadSeed(signal)
+    } catch (seedErr) {
+      if (stored && !aborted(signal, seedErr)) return { workspace: stored, source: 'browser' }
+      throw seedErr
+    }
+    if (stored) return { workspace: withSeedDefaults(stored, seed), source: 'browser' }
+    return { workspace: seed, source: 'browser' }
   }
 }
 
